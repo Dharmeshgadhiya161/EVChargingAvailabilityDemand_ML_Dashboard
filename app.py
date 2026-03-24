@@ -276,23 +276,56 @@ def rag_retrieve(question, max_chunks=3):
 # ═══════════════════════════════════════════════════════════
 
 # ── Sidebar header ────────────────────────────────────────────────────────────
-st.sidebar.markdown("""
-<div style="text-align:center; padding: 10px 0 20px 0;">
-    <div style="font-size:40px;">⚡</div>
-    <div style="font-size:18px; font-weight:700;
-                color:#7c83e0; letter-spacing:1px;">
-        EV INTEL
+import base64
+def get_base64(img_path):
+    with open(img_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+img1 = get_base64("assets/ev1.png")
+
+# st.markdown(f"""
+# <img src="data:image/png;base64,{img1}" width="100">
+# """, unsafe_allow_html=True)
+
+# Sidebar row layout
+col1, col2 = st.sidebar.columns([1,1])
+
+with col1:
+    st.image(f"data:image/png;base64,{img1}", width=90)
+
+with col2:
+    st.markdown("""
+    <div style="padding-top:5px;">
+        <div style="font-size:18px; font-weight:700;
+                    color:#7c83e0;">
+            EV INTEL
+        </div>
+        <div style="font-size:11px; color:#8b92a5;">
+            Charging Analytics Platform
+        </div>
     </div>
-    <div style="font-size:11px; color:#8b92a5;
-                margin-top:4px; letter-spacing:0.5px;">
-        Charging Analytics Platform
-    </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+
+
+#st.sidebar.image(f"data:image/png;base64,{img1}", width=100)
+
+
+# st.sidebar.markdown("""
+# <div style="text-align:center; padding: 10px 0 20px 0;">
+#     <div style="font-size:40px;">⚡</div>
+#     <div style="font-size:18px; font-weight:700;
+#                 color:#7c83e0; letter-spacing:1px;">
+#         EV INTEL
+#     </div>
+#     <div style="font-size:11px; color:#8b92a5;
+#                 margin-top:4px; letter-spacing:0.5px;">
+#         Charging Analytics Platform
+#     </div>
+# </div>
+# """, unsafe_allow_html=True)
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
-    "<p style='color:#8b92a5; font-size:11px;"
+    "<p style='color:#8b92a5; font-size:14px;"
     " font-weight:600; letter-spacing:1px;'>"
     "🔽  FILTERS</p>",
     unsafe_allow_html=True
@@ -396,20 +429,21 @@ print("Part 3 written — sidebar filters")
 
 
 # ==================== MAIN DASHBOARD ====================
+
 st.markdown("""
 <div style="background: linear-gradient(135deg, #1e2130, #252950);
             border: 1px solid #2d3250;
             border-radius: 16px;
-            padding: 24px 32px;
+            padding: 10px 18px;
             margin-bottom: 24px;">
-    <div style="display:flex; align-items:center; gap:16px;">
-        <div style="font-size:48px;">⚡</div>
+    <div style="display:flex; align-items:center; gap:12px;">
+        <div style="font-size:40px;">⚡</div>
         <div>
-            <h1 style="margin:0; font-size:28px; color:#e8eaf0;
+            <h1 style="margin:0; font-size:22px; color:#e8eaf0;
                        font-weight:800; letter-spacing:1px;">
                 EV Charging Availability & Demand Dashboard
             </h1>
-            <p style="margin:4px 0 0 0; color:#8b92a5;
+            <p style="margin:2px 0 0 0; color:#8b92a5;
                       font-size:14px; letter-spacing:0.5px;">
                 Availability Forecasting · Demand Analytics ·
                 Station Monitoring
@@ -455,7 +489,7 @@ print("Part 4  — header and tabs")
 
 with tab1:
     # ── Section title ──────────────────────────────────────────────────────────
-    st.markdown("### 📊 Fleet-Level KPIs")
+    st.markdown("#### 📊 Fleet-Level KPIs")
      # ── Row of 4 metric cards ──────────────────────────────────────────────────
     col1, col2, col3, col4 = st.columns(4)
     # st.columns(4): divide page into 4 equal columns
@@ -1080,9 +1114,9 @@ with tab4:
     av_acc  = (valid_av["target_avail_t1"] ==
            valid_av["avail_pred"]).mean()
 
-    st.write(f"Precision: {av_prec:.3f}")
-    st.write(f"Recall: {av_rec:.3f}")
-    st.write(f"Accuracy: {av_acc:.3f}")
+    # st.write(f"Precision: {av_prec:.3f}")
+    # st.write(f"Recall: {av_rec:.3f}")
+    # st.write(f"Accuracy: {av_acc:.3f}")
 
     # Colour-coded status
     if av_f1 >= 0.85:
@@ -1102,27 +1136,27 @@ with tab4:
         f'<div class="{status_class}">{status_text}</div>',unsafe_allow_html=True)
 
     
-    st.markdown("#### 🎯 Confusion Matrix")
-    from sklearn.metrics import confusion_matrix as cm_fn
-    cm_vals = cm_fn(valid_av["target_avail_t1"],
-                        valid_av["avail_pred"])
-    fig_cm = px.imshow(
-            cm_vals,
-            text_auto=True,
-            color_continuous_scale=["#0d1117","#2166ac","#7c83e0"],
-            labels=dict(x="Predicted", y="Actual"),
-            x=["Occupied", "Available"],
-            y=["Occupied", "Available"]
-        )
-    fig_cm.update_layout(
-            height=270,
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#e8eaf0", size=12),
-            margin=dict(l=20, r=20, t=20, b=20),
-            coloraxis_showscale=False
-        )
-    st.plotly_chart(fig_cm, use_container_width=True)
+    # st.markdown("#### 🎯 Confusion Matrix")
+    # from sklearn.metrics import confusion_matrix as cm_fn
+    # cm_vals = cm_fn(valid_av["target_avail_t1"],
+    #                     valid_av["avail_pred"])
+    # fig_cm = px.imshow(
+    #         cm_vals,
+    #         text_auto=True,
+    #         color_continuous_scale=["#0d1117","#2166ac","#7c83e0"],
+    #         labels=dict(x="Predicted", y="Actual"),
+    #         x=["Occupied", "Available"],
+    #         y=["Occupied", "Available"]
+    #     )
+    # fig_cm.update_layout(
+    #         height=270,
+    #         paper_bgcolor="rgba(0,0,0,0)",
+    #         plot_bgcolor="rgba(0,0,0,0)",
+    #         font=dict(color="#e8eaf0", size=12),
+    #         margin=dict(l=20, r=20, t=20, b=20),
+    #         coloraxis_showscale=False
+    #     )
+    # st.plotly_chart(fig_cm, use_container_width=True)
 
 # ═══════════════════════════════════════════════════════════
 # TAB 5 — STATION MAP
@@ -1299,147 +1333,147 @@ with tab6:
 # """
 
 #         # Session state — persists across Streamlit reruns
-#     if "chat_display" not in st.session_state:
-#         st.session_state.chat_display = []
-#     # chat_display: what the USER sees on screen
+    if "chat_display" not in st.session_state:
+        st.session_state.chat_display = []
+    # chat_display: what the USER sees on screen
 
-#     if "chat_api" not in st.session_state:
-#         st.session_state.chat_api = []
-#     # chat_api: full augmented messages sent to Claude
-#     # includes data context prepended to each question
+    if "chat_api" not in st.session_state:
+        st.session_state.chat_api = []
+    # chat_api: full augmented messages sent to Claude
+    # includes data context prepended to each question
 
-#     # Suggested questions (only shown when chat is empty)
-#     if not st.session_state.chat_display:
+    # Suggested questions (only shown when chat is empty)
+    if not st.session_state.chat_display:
        
-#         # st.markdown(
-#         #     "<p style=\\"color:#8b92a5;font-size:13px\\">"
-#         #     "💡 <b>Click a question to get started:</b></p>",
-#         #     unsafe_allow_html=True)
-#         suggestions = [
-#             "Which city has the highest utilization?",
-#             "When are stations most congested?",
-#             "How does rain affect charging demand?",
-#             "Which network performs best?",
-#             "What pricing strategy do you recommend?",
-#             "When is the best time for maintenance?",
-#             "How do weekdays and weekends compare?",
-#         ]
-#         sg1, sg2 = st.columns(2)
-#         for i, sug in enumerate(suggestions):
-#             if (sg1 if i%2==0 else sg2).button(
-#                     sug, key=f"sg_{i}",
-#                     use_container_width=True):
-#                 st.session_state.pending_q = sug
+        # st.markdown(
+        #     "<p style=\\"color:#8b92a5;font-size:13px\\">"
+        #     "💡 <b>Click a question to get started:</b></p>",
+        #     unsafe_allow_html=True)
+        suggestions = [
+            "Which city has the highest utilization?",
+            "When are stations most congested?",
+            "How does rain affect charging demand?",
+            "Which network performs best?",
+            "What pricing strategy do you recommend?",
+            "When is the best time for maintenance?",
+            "How do weekdays and weekends compare?",
+        ]
+        sg1, sg2 = st.columns(2)
+        for i, sug in enumerate(suggestions):
+            if (sg1 if i%2==0 else sg2).button(
+                    sug, key=f"sg_{i}",
+                    use_container_width=True):
+                st.session_state.pending_q = sug
 
-#     # Display all previous chat messages
-#     for msg in st.session_state.chat_display:
-#         with st.chat_message(msg["role"]):
-#             st.markdown(msg["content"])
+    # Display all previous chat messages
+    for msg in st.session_state.chat_display:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
 
-#     # Chat input bar at the bottom
-#     user_input = st.chat_input(
-#         "Ask about demand, availability, pricing, or model results..."
-#     )
+    # Chat input bar at the bottom
+    user_input = st.chat_input(
+        "Ask about demand, availability, pricing, or model results..."
+    )
 
-#     # Handle suggestion button clicks
-#     if "pending_q" in st.session_state:
-#         user_input = st.session_state.pop("pending_q")
+    # Handle suggestion button clicks
+    if "pending_q" in st.session_state:
+        user_input = st.session_state.pop("pending_q")
 
-#     # Process new question
-#     if user_input:
+    # Process new question
+    if user_input:
 
-#         # Show user message immediately
-#         with st.chat_message("user"):
-#             st.markdown(user_input)
-#         st.session_state.chat_display.append(
-#             {"role": "user", "content": user_input})
+        # Show user message immediately
+        with st.chat_message("user"):
+            st.markdown(user_input)
+        st.session_state.chat_display.append(
+            {"role": "user", "content": user_input})
 
-#         # Get Claude answer with spinner
-#         with st.chat_message("assistant"):
-#             with st.spinner("🔍 Retrieving data and generating answer..."):
-#                 try:
-#                     # Step 1: Retrieve relevant data context
-#                     ctx = rag_retrieve(user_input, max_chunks=3)
-#                     # rag_retrieve: defined at top of file
-#                     # Returns text blocks matching the question keywords
+        # Get Claude answer with spinner
+        with st.chat_message("assistant"):
+            with st.spinner("🔍 Retrieving data and generating answer..."):
+                try:
+                    # Step 1: Retrieve relevant data context
+                    ctx = rag_retrieve(user_input, max_chunks=3)
+                    # rag_retrieve: defined at top of file
+                    # Returns text blocks matching the question keywords
 
-#                     # Step 2: Build augmented prompt (data + question)
-#                     augmented = (
-#                         f"DATA CONTEXT (real stats from EV dataset):\\n"
-#                         f"{ctx}\\n\\n"
-#                         f"QUESTION: {user_input}\\n\\n"
-#                         f"Answer using only the data context above. "
-#                         f"Cite specific numbers."
-#                     )
+                    # Step 2: Build augmented prompt (data + question)
+                    augmented = (
+                        f"DATA CONTEXT (real stats from EV dataset):\\n"
+                        f"{ctx}\\n\\n"
+                        f"QUESTION: {user_input}\\n\\n"
+                        f"Answer using only the data context above. "
+                        f"Cite specific numbers."
+                    )
 
-#                     # Step 3: Add to full conversation history
-#                     messages = st.session_state.chat_api + [
-#                         {"role": "user", "content": augmented}
-#                     ]
+                    # Step 3: Add to full conversation history
+                    messages = st.session_state.chat_api + [
+                        {"role": "user", "content": augmented}
+                    ]
 
-#                     # Step 4: Call Claude API
-#                     # ai_client = anthropic.Anthropic(
-#                     #     api_key=os.environ.get("","")
-#                     # )
-#                     # response  = ai_client.messages.create(
-#                     #     model      = "claude-opus-4-5",
-#                     #     max_tokens = 1024,
-#                     #     system     = SYSTEM_PROMPT,
-#                     #     messages   = messages
-#                     # )
+                    # Step 4: Call Claude API
+                    # ai_client = anthropic.Anthropic(
+                    #     api_key=os.environ.get("","")
+                    # )
+                    # response  = ai_client.messages.create(
+                    #     model      = "claude-opus-4-5",
+                    #     max_tokens = 1024,
+                    #     system     = SYSTEM_PROMPT,
+                    #     messages   = messages
+                    # )
 
-#                     # Alternative: Google Gemini API
-#                     genai.configure(api_key="AIzaSyDj95CBwQ5_dOky-T8YzkiaEUgZfkbFwMA")
-#                     model = genai.GenerativeModel("gemini-1.0")
-#                     response = model.generate_content("Explain EV charging demand prediction")
-#                     print(response.text)
+                    # Alternative: Google Gemini API
+                    genai.configure(api_key="AIzaSyDj95CBwQ5_dOky-T8YzkiaEUgZfkbFwMA")
+                    model = genai.GenerativeModel("gemini-1.0")
+                    response = model.generate_content("Explain EV charging demand prediction")
+                    print(response.text)
 
-#                     # Step 5: Extract answer text
-#                     answer = response.text
+                    # Step 5: Extract answer text
+                    answer = response.text
 
-#                 except anthropic.AuthenticationError:
-#                     answer = (
-#                         "⚠️ **API Key Error**\\n\\n"
-#                         "Please set your key:\\n"
-#                         "```python\\n"
-#                         "import os\\n"
-#                         "os.environ[\\'ANTHROPIC_API_KEY\\'] "
-#                         "= \\'your-key-here\\'\\n"
-#                         "```\\n"
-#                         "Get a free key at console.anthropic.com"
-#                     )
-#                 except Exception as e:
-#                     answer = f"⚠️ **Error:** {str(e)}"
+                except anthropic.AuthenticationError:
+                    answer = (
+                        "⚠️ **API Key Error**\\n\\n"
+                        "Please set your key:\\n"
+                        "```python\\n"
+                        "import os\\n"
+                        "os.environ[\\'_API_KEY\\'] "
+                        "= \\'your-key-here\\'\\n"
+                        "```\\n"
+                        ""
+                    )
+                except Exception as e:
+                    answer = f"⚠️ **Error:** {str(e)}"
 
-#             st.markdown(answer)
+            st.markdown(answer)
 
-#         # Update display history
-#         st.session_state.chat_display.append(
-#             {"role": "assistant", "content": answer})
+        # Update display history
+        st.session_state.chat_display.append(
+            {"role": "assistant", "content": answer})
 
-#         # Update API history with augmented question
-#         st.session_state.chat_api.extend([
-#             {"role": "user",
-#              "content": (f"DATA CONTEXT:\\n"
-#                          f"{rag_retrieve(user_input)}\\n\\n"
-#                          f"QUESTION: {user_input}")},
-#             {"role": "assistant", "content": answer}
-#         ])
+        # Update API history with augmented question
+        st.session_state.chat_api.extend([
+            {"role": "user",
+             "content": (f"DATA CONTEXT:\\n"
+                         f"{rag_retrieve(user_input)}\\n\\n"
+                         f"QUESTION: {user_input}")},
+            {"role": "assistant", "content": answer}
+        ])
 
-#         # Rerun to scroll to new message
-#         st.rerun()
+        # Rerun to scroll to new message
+        st.rerun()
 
-#     # Footer controls
-#     if st.session_state.chat_display:
-#         st.markdown("---")
-#         fc1, fc2, fc3 = st.columns([1,1,4])
-#         if fc1.button("🗑️ Clear Chat", use_container_width=True):
-#             st.session_state.chat_display = []
-#             st.session_state.chat_api     = []
-#             st.rerun()
-#         n = len(st.session_state.chat_display) // 2
-#         fc3.caption(
-#             f"💬 {n} turn(s) · "
-#             f"{len(context_lib)} data chunks · "
-#             f"Model: claude-opus-4-5"
-#         )
+    # Footer controls
+    if st.session_state.chat_display:
+        st.markdown("---")
+        fc1, fc2, fc3 = st.columns([1,1,4])
+        if fc1.button("🗑️ Clear Chat", use_container_width=True):
+            st.session_state.chat_display = []
+            st.session_state.chat_api     = []
+            st.rerun()
+        n = len(st.session_state.chat_display) // 2
+        fc3.caption(
+            f"💬 {n} turn(s) · "
+            f"{len(context_lib)} data chunks · "
+            f"Model: claude-opus-4-5"
+        )
