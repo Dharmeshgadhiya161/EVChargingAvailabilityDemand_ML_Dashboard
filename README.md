@@ -65,7 +65,7 @@ Dashboard live link
 https://github.com/user-attachments/assets/99b4af9a-2663-4de7-821e-c35426f7b76e
 
 
-<div align="center">
+<!-- <div align="center">
   <img align="right" width="120" height="120" alt="ev1" 
        src="https://github.com/user-attachments/assets/acea8485-c939-46e5-82f5-a27253f6ae8b" />
 
@@ -139,4 +139,123 @@ ev-charging-intelligence/
 ├── app.py                 # Streamlit Dashboard
 ├── chatbot.py             # AI Chatbot (RAG)
 ├── requirements.txt
+└── README.md -->
+
+
+<div align="center">
+  <img align="right" width="130" height="130" alt="ev1" 
+       src="https://github.com/user-attachments/assets/acea8485-c939-46e5-82f5-a27253f6ae8b" />
+
+  # EV Charging Availability & Demand Intelligence
+
+  **Real-time intelligence for Electric Vehicle charging infrastructure**
+
+  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+  [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+  [![Streamlit](https://img.shields.io/badge/Streamlit-1.30%2B-FF4B4B.svg)](https://streamlit.io/)
+  [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)]()
+
+</div>
+
+---
+
+## 🚀 Project Theme
+
+**How do time-of-day, location type, pricing, weather, traffic, and local events influence EV charging station availability — and how can we build reliable models to support drivers and infrastructure planners?**
+
+This project simulates a **Mobility & Energy Analytics team** working for:
+- City/State transportation or energy agencies
+- Electric utilities & charging network operators
+- Mobility apps optimizing routing and charging recommendations
+
+### 🎯 Objective
+
+A mobility + energy planning organization wants to:
+- Understand utilization and availability patterns by **city, network, station, and location type**
+- Identify peak congestion windows and recurring demand cycles
+- Build predictive ML models to improve decision-making
+- Deliver an interactive **Streamlit dashboard** and a **data-grounded AI chatbot**
+
+---
+
+## 📊 Dataset
+
+**EV Charging Station Availability (Synthetic Time Series)**  
+- **File**: `ev_charging_station_data.csv`  
+- **Size**: 1.3M+ records  
+- **Scope**: 150 stations, 8 major charging networks, 15 US metropolitan areas  
+- **Time Period**: July – December 2025 (30-minute intervals)
+
+**Key Columns Include**:
+- **Station Info**: `station_id`, `network`, `city`, `location_type`, `charger_type`, `power_output_kw`
+- **Availability**: `ports_available`, `ports_occupied`, `utilization_rate`, `estimated_wait_time_mins`
+- **Pricing**: `current_price`, `pricing_type`
+- **External Factors**: `temperature_f`, `weather_condition`, `traffic_congestion_index`, `local_event`, `gas_price_per_gallon`
+- **Time Features**: `timestamp`, `hour_of_day`, `day_of_week`, `is_weekend`, `is_peak_hour`
+
+---
+
+## 🛠 Chosen ML Applications (Recommended)
+
+You can choose **any two**:
+1. **Regression / Forecasting** → Predict `utilization_rate` or `estimated_wait_time_mins` at **t+1** (30 mins ahead)
+2. **Classification** → Predict whether a port will be **available** at t+1
+
+*(Other options: Clustering, Anomaly Detection, Dynamic Pricing Analytics)*
+
+---
+
+## 📋 Project Structure (6 Tasks – 3 Weeks)
+
+### Week 1
+- **Task 1**: Business Understanding, Problem Framing & EDA
+- **Task 2**: Data Preprocessing & Feature Engineering  
+  *(Lag features, rolling windows, station baselines, leakage control)*
+
+### Week 2
+- **Task 3**: Model Building & Evaluation (Two chosen applications)
+- **Task 4**: Hyperparameter Tuning & Model Optimization  
+  *(Time-based CV, error analysis by city/network/peak hours)*
+
+### Week 3
+- **Task 5**: Model Deployment & Streamlit Dashboard
+- **Task 6**: Generative AI Chatbot (RAG) + Final Presentation
+
+---
+
+## ✨ Key Achievements
+
+- Processed **1.3M+ records** across **15+ cities**
+- Engineered **15+ time-series features** (lags, rolling stats, station-hour baselines)
+- Improved model performance: **F1-score ≥ 0.70**, **ROC-AUC ≈ 0.72**
+- Reduced prediction error by **~25%** vs baseline (MAE/RMSE)
+- Built an **interactive Streamlit dashboard** with filters, heatmaps, and forecasts
+- Integrated a **data-grounded AI Chatbot** for operational queries
+
+---
+
+## 🛠 Tech Stack
+
+- **Language**: Python 3.10+
+- **Data Processing**: Pandas, NumPy
+- **Visualization**: Plotly, Matplotlib, Seaborn
+- **ML**: Scikit-learn, XGBoost/LightGBM, TensorFlow/PyTorch (LSTM optional)
+- **Dashboard**: Streamlit
+- **AI Chatbot**: RAG (LangChain / LlamaIndex + embeddings)
+- **Others**: Joblib (model saving), Parquet support
+
+---
+
+## 📂 Project Structure
+
+```bash
+ev-charging-intelligence/
+├── data/                  # Raw + processed data (ev_charging_station_data.csv)
+├── notebooks/             # EDA, preprocessing, modeling
+├── models/                # Trained models + artifacts
+├── src/                   # Reusable scripts (preprocess.py, features.py, train.py)
+├── app.py                 # Main Streamlit Dashboard
+├── chatbot.py             # AI Chatbot (RAG)
+├── requirements.txt
+├── deployment_plan.md
 └── README.md
