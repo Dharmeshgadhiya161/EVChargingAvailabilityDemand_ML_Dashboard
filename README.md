@@ -1,5 +1,6 @@
-# EV Charging Availability & Demand Intelligence <img width="80" height="80" alt="ev1" src="https://github.com/user-attachments/assets/acea8485-c939-46e5-82f5-a27253f6ae8b" /> 
+<img width="80" height="80" alt="ev1" src="https://github.com/user-attachments/assets/acea8485-c939-46e5-82f5-a27253f6ae8b" /> 
 
+# EV Charging Availability & Demand Intelligence 
 Dashboard
 
 This project aims to provide insights into EV charging station demand patterns and develop predictive tools that improve decision-making for both EV drivers and charging infrastructure operators. The final solution includes machine learning models, an interactive dashboard, and an AI assistant that helps users explore charging station data and trends.
