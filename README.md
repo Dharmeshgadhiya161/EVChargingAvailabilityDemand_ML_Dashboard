@@ -60,6 +60,10 @@ ev-charging-intelligence/
 ├── chatebod.py
 └── README.md -->
 
+
+<img width="1920" height="2609" alt="EV-Charging-Intelligence-Deshboard_1" src="https://github.com/user-attachments/assets/bb4ddbc8-1fcf-46c6-b68b-1fecf715d282" />
+
+
 <div align="center">
   <img align="right" width="130" height="130" alt="ev1" 
        src="https://github.com/user-attachments/assets/acea8485-c939-46e5-82f5-a27253f6ae8b" />
@@ -99,7 +103,7 @@ A mobility + energy planning organization wants to:
 ## 📊 Dataset
 
 **EV Charging Station Availability (Synthetic Time Series)**  
-- **File**: `ev_charging_station_data.csv`  
+- **File**: `ev_charging_data.csv`  
 - **Size**: 1.3M+ records  
 - **Scope**: 150 stations, 8 major charging networks, 15 US metropolitan areas  
 - **Time Period**: July – December 2025 (30-minute intervals)
@@ -152,7 +156,7 @@ https://github.com/user-attachments/assets/99b4af9a-2663-4de7-821e-c35426f7b76e
 
 ```bash
 ev-charging-intelligence/
-├── data/                  # Raw + processed data (ev_charging_station_data.csv)
+├── data/                  # Raw + processed data (ev_charging_data.csv)
 ├── notebooks/             # EDA, preprocessing, modeling
 ├── models/                # Trained models + artifacts
 ├── src/                   # Reusable scripts (preprocess.py, features.py, train.py)
@@ -162,6 +166,4 @@ ev-charging-intelligence/
 ├── deployment_plan.md
 └── README.md
 -----
-
-
 
