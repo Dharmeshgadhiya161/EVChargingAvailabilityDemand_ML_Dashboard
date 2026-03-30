@@ -61,9 +61,6 @@ ev-charging-intelligence/
 └── README.md -->
 
 
-<img width="1920" height="2609" alt="EV-Charging-Intelligence-Deshboard_1" src="https://github.com/user-attachments/assets/bb4ddbc8-1fcf-46c6-b68b-1fecf715d282" />
-
-
 <div align="center">
   <img align="right" width="130" height="130" alt="ev1" 
        src="https://github.com/user-attachments/assets/acea8485-c939-46e5-82f5-a27253f6ae8b" />
@@ -166,4 +163,4 @@ ev-charging-intelligence/
 ├── deployment_plan.md
 └── README.md
 -----
-
+<img width="1920" height="2009" alt="EV-Charging-Intelligence-Deshboard_1" src="https://github.com/user-attachments/assets/bb4ddbc8-1fcf-46c6-b68b-1fecf715d282" />
